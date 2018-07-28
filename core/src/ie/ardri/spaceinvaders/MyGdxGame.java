@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import ie.ardri.spaceinvaders.managers.AssetManager;
+import ie.ardri.spaceinvaders.managers.AssetManager.TextureFile;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -12,8 +14,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
+	  AssetManager assetManager = new AssetManager();
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = assetManager.get(TextureFile.TANK);
 	}
 
 	@Override
