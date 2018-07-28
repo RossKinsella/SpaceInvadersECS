@@ -11,12 +11,13 @@ buildscript {
     }
     dependencies {
         classpath 'org.wisepersist:gwt-gradle-plugin:1.0.6'
-        
+        classpath "net.onedaybeard.artemis:artemis-odb-gradle-plugin:2.1.0"
 
     }
 }
 
 allprojects {
+    apply plugin: "artemis"
     apply plugin: "eclipse"
     apply plugin: "idea"
 
@@ -75,7 +76,7 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        
+        compile "net.onedaybeard.artemis:artemis-odb:2.1.0"
     }
 }
 

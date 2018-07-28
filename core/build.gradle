@@ -5,6 +5,14 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
+weave {
+    classesDir = sourceSets.main.output.classesDir
+    dependsOn build
+    enableArtemisPlugin = true
+    enablePooledWeaving = true
+    generateLinkMutators = true
+    optimizeEntitySystems = true
+}
 
 eclipse.project {
     name = appName + "-core"
