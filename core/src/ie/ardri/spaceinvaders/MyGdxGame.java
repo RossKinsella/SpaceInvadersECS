@@ -1,36 +1,30 @@
 package ie.ardri.spaceinvaders;
 
+import com.artemis.World;
+import com.artemis.WorldConfiguration;
+import com.artemis.WorldConfigurationBuilder;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ie.ardri.spaceinvaders.managers.AssetManager;
-import ie.ardri.spaceinvaders.managers.AssetManager.TextureFile;
+import ie.ardri.spaceinvaders.factories.LocalPlayerFactory;
+import ie.ardri.spaceinvaders.managers.Assets;
+import ie.ardri.spaceinvaders.systems.Rendering;
 
 public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
-	public void create () {
-	  AssetManager assetManager = new AssetManager();
-		batch = new SpriteBatch();
-		img = assetManager.get(TextureFile.TANK);
-	}
+  private World world;
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void create () {
+	  Assets.initialise();
+    WorldConfiguration configuration = new WorldConfigurationBuilder()
+        .with(new Rendering())
+        .build();
+    world = new World(configuration);
+    LocalPlayerFactory.createLocalPlayer(world, 5, 20);
 	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+
+  @Override
+  public void render () {
+    world.setDelta(Gdx.graphics.getDeltaTime());
+    world.process();
+  }
 }

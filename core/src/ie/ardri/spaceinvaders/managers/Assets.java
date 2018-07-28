@@ -1,13 +1,12 @@
 package ie.ardri.spaceinvaders.managers;
 
-import com.artemis.Manager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-public class AssetManager extends Manager {
-  private Texture tank, invader, bullet, shelter;
-  private Sound coverDamaged, explosion, invaderGun, tankGun;
+public class Assets {
+  private static Texture tank, invader, bullet, shelter;
+  private static Sound coverDamaged, explosion, invaderGun, tankGun;
 
   public enum TextureFile {
     TANK,
@@ -23,12 +22,12 @@ public class AssetManager extends Manager {
     TANK_GUN
   }
 
-  public AssetManager() {
+  public static void initialise() {
     importTextures();
     importSounds();
   }
 
-  public Texture get(TextureFile texture) {
+  public static Texture get(TextureFile texture) {
     switch (texture) {
       case TANK:    return tank;
       case INVADER: return invader;
@@ -38,7 +37,7 @@ public class AssetManager extends Manager {
     }
   }
 
-  public Sound get(SoundFile sound) {
+  public static Sound get(SoundFile sound) {
     switch ( sound) {
       case TANK_GUN:      return tankGun;
       case EXPLOSION:     return explosion;
@@ -48,14 +47,14 @@ public class AssetManager extends Manager {
     }
   }
 
-  private void importTextures() {
+  private static void importTextures() {
     tank    = new Texture(Gdx.files.internal("images/tank.png"));
     invader = new Texture(Gdx.files.internal("images/invader.png"));
     bullet  = new Texture(Gdx.files.internal("images/bullet.png"));
     shelter = new Texture(Gdx.files.internal("images/shelter.png"));
   }
 
-  private void importSounds() {
+  private static void importSounds() {
     coverDamaged = Gdx.audio.newSound(Gdx.files.internal("sounds/cover_damaged.wav"));
     explosion    = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
     invaderGun   = Gdx.audio.newSound(Gdx.files.internal("sounds/invader_gun.wav"));
