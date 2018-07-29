@@ -41,5 +41,4 @@ public class Rendering extends EntityProcessingSystem {
   protected void end() {
     batch.end();
   }
-
 }
