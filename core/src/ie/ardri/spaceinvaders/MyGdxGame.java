@@ -10,6 +10,8 @@ import ie.ardri.spaceinvaders.managers.Assets;
 import ie.ardri.spaceinvaders.systems.Rendering;
 
 public class MyGdxGame extends ApplicationAdapter {
+  public static final int GAME_WIDTH = 500;
+  public static final int GAME_HEIGHT = 500;
   private World world;
 
 	@Override
@@ -19,7 +21,7 @@ public class MyGdxGame extends ApplicationAdapter {
         .with(new Rendering())
         .build();
     world = new World(configuration);
-    LocalPlayerFactory.createLocalPlayer(world, 5, 20);
+    LocalPlayerFactory.createLocalPlayer(world, GAME_WIDTH / 2 - 32 / 2, 20);
 	}
 
   @Override

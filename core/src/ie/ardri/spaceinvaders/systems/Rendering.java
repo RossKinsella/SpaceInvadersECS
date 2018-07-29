@@ -8,22 +8,18 @@ import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import ie.ardri.spaceinvaders.components.Position;
-import ie.ardri.spaceinvaders.components.Texture;
-import ie.ardri.spaceinvaders.managers.Assets;
+import ie.ardri.spaceinvaders.components.SpriteComponent;
 
 @Wire
 public class Rendering extends EntityProcessingSystem {
 
-  protected ComponentMapper<Texture> textureReferenceMapper;
-  protected ComponentMapper<Position>  positionMapper;
+  protected ComponentMapper<SpriteComponent> spriteComponentMapper;
 
   private SpriteBatch batch;
-  private Texture texture;
-  private Position position;
+  private SpriteComponent spriteComponent;
 
   public Rendering() {
-    super(Aspect.all(Texture.class, Position.class));
+    super(Aspect.all(SpriteComponent.class));
 
     batch = new SpriteBatch();
   }
@@ -37,9 +33,8 @@ public class Rendering extends EntityProcessingSystem {
 
   @Override
   protected void process(Entity e) {
-    texture = textureReferenceMapper.get(e);
-    position = positionMapper.get(e);
-    batch.draw(Assets.get(texture.reference), position.x, position.y);
+    spriteComponent = spriteComponentMapper.get(e);
+    spriteComponent.sprite.draw(batch);
   }
 
   @Override
